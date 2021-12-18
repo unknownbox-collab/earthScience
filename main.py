@@ -20,7 +20,7 @@ R_SUN = 696340
 R_EARTH = 6371
 AU = 149597870700
 
-camSize = 1
+camSize = 5
 
 def add_h(arg):
     h = 1e-6
@@ -111,10 +111,15 @@ if __name__ == "__main__":
     clock = pygame.time.Clock()
     #things = [Planet((-20,-5), 3, 300), Planet((20,5), 3, 300, velocity= Vector(90,0))]
     things = []
-    for x in range(10):
-        for y in range(10):
-            a = random.randint(1,100000000)
-            things.append(Planet((x*5,y*5),0.0000001*a,a))
+    #for x in range(2):
+    #    for y in range(2):
+    #        a = random.randint(1,1000)
+    things.append(Planet((0,0),10,10000))
+    a = 100
+    m = 10
+    mu = G*(1e+10+m)
+    things.append(Planet((0,50),10,m,velocity=Vector(180,0.05)))
+
     while True:
         #clock.tick(1000000000)
         for event in pygame.event.get():
@@ -129,4 +134,5 @@ if __name__ == "__main__":
             temp.pop(i)
             thing.tick(temp)
             thing.draw(screen)
+        print(things[1].force.theta,things[1].force.value,things[1].velocity.theta,things[1].velocity.value)
         pygame.display.update()
